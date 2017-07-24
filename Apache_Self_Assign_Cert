@@ -1,0 +1,12 @@
+
+
+openssl genrsa 2048 > ca.key
+openssl req -new -key ca.key > ca.csr
+openssl x509 -in ca.csr -out ca.crt -req
+-signkey ca.key -days 365
+/etc/pki/tls/certs/ca.crt
+
+/etc/pki/tls/private/ca.key
+
+
+ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
