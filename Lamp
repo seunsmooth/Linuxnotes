@@ -1,0 +1,63 @@
+sudo yum install httpd
+sudo systemctl start httpd.service
+find your public ip address (ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//')
+wget https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
+md5sum mysql57-community-release-el7-9.noarch.rpm
+sudo rpm -ivh mysql57-community-release-el7-9.noarch.rpm
+sudo yum install mysql-server
+sudo systemctl enable mysqld
+sudo systemctl start mysqld
+
+OR
+sudo systemctl enable mariadb.service
+sudo systemctl start mariadb
+sudo mysql_secure_installation
+sudo grep 'temporary password' /var/log/mysqld.log
+Install PHP
+sudo yum install php php-mysql
+sudo systemctl restart httpd.service
+yum search php
+yum info package_nan
+open http and https 
+sudo firewall-cmd --permanent --zone=public --add-servic
+sudo firewall-cmd --permanent --zone=public --add-service=https ';cd 
+sudo firewall-cmd --reload
+
+
+Installing wordpress on redhat.
+sudo grep 'temporary password' /var/log/mysqld.log
+mysql -u root -p
+
+CREATE DATABASE wordpress;
+CREATE USER wordpressuser@localhost IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON wordpress.* TO wordpressuser@localhost IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
+Exit
+sudo yum install php-gd
+sudo service httpd restart
+
+cd /tmp
+# wget http://wordpress.org/latest.tar.gz
+tar -xvzf latest.tar.gz -C /var/www/html
+or
+sudo rsync -avP ~/tmp/wordpress/ /var/www/html/
+Configuration wordpress installation 
+cd /var/www/html/wordpress
+cp-config-sample.php wp-config.php
+vim wp-config.php
+
+
+
+CREATE APACHE VIRTUAL HOST
+ vi /etc/httpd/conf/httpd.conf
+ <VirtualHost *:80>
+ServerAdmin tecmint@tecmint.com
+DocumentRoot /var/www/html/wordpress
+ServerName wordpress
+ErrorLog /var/log/httpd/wordpress-error-log
+CustomLog /var/log/httpd/wordpress-acces-log common
+</VirtualHost>
+--------- On CentOs/RHEL 7 and Fedora 22-25 --------- 
+# systemctl restart httpd.service 
+--------- On CentOs/RHEL 6 and Fedora 15-21 --------- 
+# service httpd restar
