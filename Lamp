@@ -1,3 +1,4 @@
+
 sudo yum install httpd
 sudo systemctl start httpd.service
 find your public ip address (ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//')
@@ -27,6 +28,7 @@ sudo firewall-cmd --reload
 Installing wordpress on redhat.
 sudo grep 'temporary password' /var/log/mysqld.log
 mysql -u root -p
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
 
 CREATE DATABASE wordpress;
 CREATE USER wordpressuser@localhost IDENTIFIED BY 'password';
